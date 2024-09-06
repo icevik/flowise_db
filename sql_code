@@ -1,0 +1,157 @@
+CREATE TABLE "apikey" (
+    "id" VARCHAR(255) NOT NULL,
+    "apiKey" VARCHAR(255) NOT NULL,
+    "apiSecret" VARCHAR(255) NOT NULL,
+    "keyName" VARCHAR(255) NOT NULL,
+    "updatedDate" TIMESTAMP NOT NULL,
+    PRIMARY KEY ("id")
+);
+
+CREATE TABLE "assistant" (
+    "id" VARCHAR(255) NOT NULL,
+    "details" TEXT NOT NULL,
+    "credential" VARCHAR(255) NOT NULL,
+    "iconSrc" VARCHAR(255) NULL,
+    "createdDate" TIMESTAMP NOT NULL,
+    "updatedDate" TIMESTAMP NOT NULL,
+    PRIMARY KEY ("id")
+);
+
+CREATE TABLE "chat_flow" (
+    "id" VARCHAR(255) NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    "flowData" TEXT NOT NULL,
+    "deployed" BOOLEAN NULL,
+    "isPublic" BOOLEAN NULL,
+    "apikeyid" VARCHAR(255) NULL,
+    "chatbotConfig" TEXT NULL,
+    "createdDate" TIMESTAMP NOT NULL,
+    "updatedDate" TIMESTAMP NOT NULL,
+    "apiConfig" TEXT NULL,
+    "analytic" TEXT NULL,
+    "category" TEXT NULL,
+    "speechToText" TEXT NULL,
+    "type" TEXT NULL,
+    PRIMARY KEY ("id")
+);
+
+CREATE TABLE "chat_message" (
+    "id" VARCHAR(255) NOT NULL,
+    "role" VARCHAR(255) NOT NULL,
+    "chatflowid" VARCHAR(255) NOT NULL,
+    "content" TEXT NOT NULL,
+    "sourceDocuments" TEXT NULL,
+    "usedTools" TEXT NULL,
+    "fileAnnotations" TEXT NULL,
+    "fileUploads" TEXT NULL,
+    "createdDate" TIMESTAMP NOT NULL,
+    "chatType" VARCHAR(255) NOT NULL,
+    "chatId" VARCHAR(255) NOT NULL,
+    "memoryType" VARCHAR(255) NULL,
+    "sessionId" VARCHAR(255) NULL,
+    "leadEmail" TEXT NULL,
+    "agentReasoning" TEXT NULL,
+    "action" TEXT NULL,
+    PRIMARY KEY ("id")
+);
+
+CREATE INDEX "IDX_e574527322272fd838f4f0f3d3" ON "chat_message" ("chatflowid");
+
+CREATE TABLE "chat_message_feedback" (
+    "id" VARCHAR(255) NOT NULL,
+    "chatflowid" VARCHAR(255) NOT NULL,
+    "chatId" VARCHAR(255) NOT NULL,
+    "messageId" VARCHAR(255) NOT NULL,
+    "rating" VARCHAR(255) NOT NULL,
+    "content" TEXT NULL,
+    "createdDate" TIMESTAMP NOT NULL,
+    PRIMARY KEY ("id")
+);
+
+CREATE TABLE "credential" (
+    "id" VARCHAR(255) NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    "credentialName" VARCHAR(255) NOT NULL,
+    "encryptedData" TEXT NOT NULL,
+    "createdDate" TIMESTAMP NOT NULL,
+    "updatedDate" TIMESTAMP NOT NULL,
+    PRIMARY KEY ("id")
+);
+
+CREATE TABLE "document_store" (
+    "id" VARCHAR(255) NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    "description" TEXT NULL,
+    "status" VARCHAR(255) NOT NULL,
+    "loaders" TEXT NULL,
+    "whereUsed" TEXT NULL,
+    "updatedDate" TIMESTAMP NOT NULL,
+    "createdDate" TIMESTAMP NOT NULL,
+    "vectorStoreConfig" TEXT NULL,
+    "embeddingConfig" TEXT NULL,
+    "recordManagerConfig" TEXT NULL,
+    PRIMARY KEY ("id")
+);
+
+CREATE TABLE "document_store_file_chunk" (
+    "id" VARCHAR(255) NOT NULL,
+    "docId" VARCHAR(255) NOT NULL,
+    "storeId" VARCHAR(255) NOT NULL,
+    "chunkNo" INTEGER NOT NULL,
+    "pageContent" TEXT NULL,
+    "metadata" TEXT NULL,
+    PRIMARY KEY ("id")
+);
+
+CREATE INDEX "IDX_e213b811b01405a42309a6a410" ON "document_store_file_chunk" ("storeId");
+CREATE INDEX "IDX_e76bae1780b77e56aab1h2asd4" ON "document_store_file_chunk" ("docId");
+
+CREATE TABLE "lead" (
+    "id" VARCHAR(255) NOT NULL,
+    "chatflowid" VARCHAR(255) NOT NULL,
+    "chatId" VARCHAR(255) NOT NULL,
+    "name" TEXT NULL,
+    "email" TEXT NULL,
+    "phone" TEXT NULL,
+    "createdDate" TIMESTAMP NOT NULL,
+    PRIMARY KEY ("id")
+);
+
+CREATE TABLE "migrations" (
+    "id" SERIAL NOT NULL,
+    "timestamp" BIGINT NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    PRIMARY KEY ("id")
+);
+
+CREATE TABLE "tool" (
+    "id" VARCHAR(255) NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    "description" TEXT NOT NULL,
+    "color" VARCHAR(255) NOT NULL,
+    "iconSrc" VARCHAR(255) NULL,
+    "schema" TEXT NULL,
+    "func" TEXT NULL,
+    "createdDate" TIMESTAMP NOT NULL,
+    "updatedDate" TIMESTAMP NOT NULL,
+    PRIMARY KEY ("id")
+);
+
+CREATE TABLE "upsert_history" (
+    "id" VARCHAR(255) NOT NULL,
+    "chatflowid" VARCHAR(255) NOT NULL,
+    "result" TEXT NOT NULL,
+    "flowData" TEXT NOT NULL,
+    "date" TIMESTAMP NOT NULL,
+    PRIMARY KEY ("id")
+);
+
+CREATE TABLE "variable" (
+    "id" VARCHAR(255) NOT NULL,
+    "name" TEXT NOT NULL,
+    "value" TEXT NOT NULL,
+    "type" VARCHAR(255) NULL,
+    "createdDate" TIMESTAMP NOT NULL,
+    "updatedDate" TIMESTAMP NOT NULL,
+    PRIMARY KEY ("id")
+);
