@@ -1,3 +1,10 @@
+import sys
+import os
+
+# Sanal ortamı etkinleştir
+activate_this = '/home/ubuntu/myenv/bin/activate_this.py'
+exec(open(activate_this).read(), {'__file__': activate_this})
+
 import sqlite3
 import time
 import schedule
