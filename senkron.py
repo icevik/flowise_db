@@ -1,10 +1,3 @@
-import sys
-import os
-
-# Sanal ortamı etkinleştir
-activate_this = '/home/ubuntu/myenv/bin/activate_this.py'
-exec(open(activate_this).read(), {'__file__': activate_this})
-
 import sqlite3
 import time
 import schedule
@@ -13,9 +6,9 @@ import os
 import sys
 
 # SQLite ve Supabase bağlantı bilgileri
-SQLITE_DB_PATH = r"db_path"
-SUPABASE_URL = "---"
-SUPABASE_KEY = "---"
+SQLITE_DB_PATH = r"FLOWISE_DATABASE_PATH"
+SUPABASE_URL = "SUPABASE_URL"
+SUPABASE_KEY = "SUPABASE_API_KEY"
 
 def connect_sqlite():
     try:
