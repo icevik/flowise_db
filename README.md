@@ -1,3 +1,5 @@
+Attention! The following tutorial has been tested and implemented on the “Ubuntu 24.04 LTS” operating system.
+
 # Flowise Database Synchronization
 
 This project is a tool to synchronize Flowise database with Supabase. This way you can store and manage your Flowise database on different platforms.
